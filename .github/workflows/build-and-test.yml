@@ -30,9 +30,9 @@ jobs:
 
     # Build examples
     - name: Build POSIX TCP server
-      run: cd posix/tcp/wh_server_tcp && make WOLFSSL_DIR=../wolfssl WOLFHSM_DIR=../wolfhsm
+      run: ls && cd posix/tcp/wh_server_tcp && make WOLFSSL_DIR=../../../wolfssl WOLFHSM_DIR=../../../wolfhsm
     - name: Build POSIX TCP client
-      run: cd posix/tcp/wh_client_tcp && make WOLFSSL_DIR=../wolfssl WOLFHSM_DIR=../wolfhsm
+      run: cd posix/tcp/wh_client_tcp && make WOLFSSL_DIR=../../../wolfssl WOLFHSM_DIR=../../../wolfhsm
 
     # Start the server in the background
     - name: Run POSIX TCP server
