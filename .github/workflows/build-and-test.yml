@@ -51,6 +51,6 @@ jobs:
     # Optional: Kill the server process if it doesn't exit on its own
     - name: Cleanup POSIX TCP server
       if: always()
-      run: kill $TCP_SERVER_PID
+      run: kill $TCP_SERVER_PID || true
 
 
