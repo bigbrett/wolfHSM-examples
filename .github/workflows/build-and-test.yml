@@ -45,7 +45,7 @@ jobs:
     # Run the client that connects to the server
     - name: Run POSIX TCP client
       run: |
-	cd posix/tcp/client
+        cd posix/tcp/wh_client_tcp
         ./Build/wh_client_tcp.elf
 
     # Optional: Kill the server process if it doesn't exit on its own
