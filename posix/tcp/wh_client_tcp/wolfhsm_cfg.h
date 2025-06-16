@@ -25,8 +25,10 @@
 #ifndef WOLFHSM_CFG_H_
 #define WOLFHSM_CFG_H_
 
-
 /** wolfHSM settings */
+#define WOLFHSM_CFG_ENABLE_CLIENT
+
 #define WOLFHSM_CFG_COMM_DATA_LEN 1280
+
 
 #endif /* WOLFHSM_CFG_H_ */

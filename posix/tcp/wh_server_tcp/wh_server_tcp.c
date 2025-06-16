@@ -629,11 +629,18 @@ int main(int argc, char** argv)
         .devId = INVALID_DEVID,
     }};
 
+#if defined(WOLFHSM_CFG_SHE_EXTENSION)
+    whServerSheContext she[1] = {{0}};
+#endif
+
     whServerConfig s_conf[1] = {{
         .comm_config = cs_conf,
         .nvm         = nvm,
         .crypto      = crypto,
         .devId       = INVALID_DEVID,
+#if defined(WOLFHSM_CFG_SHE_EXTENSION)
+        .she         = she,
+#endif
     }};
 
     rc = wh_Nvm_Init(nvm, n_conf);

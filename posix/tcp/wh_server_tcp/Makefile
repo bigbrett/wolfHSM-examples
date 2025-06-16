@@ -1,5 +1,5 @@
 # Set to @ if you want to suppress command echo
-CMD_ECHO = 
+CMD_ECHO =
 
 # Important directories
 BUILD_DIR = ./Build
@@ -18,9 +18,19 @@ INC = -I$(WOLFHSM_DIR) \
 
 # Defines
 DEF = -DWOLFSSL_USER_SETTINGS -D_GNUC_ -DWOLFHSM_CFG -D_POSIX_C_SOURCE=200809L
- 
+
+# Debug build
+ifeq ($(DEBUG),1)
+DEF += -ggdb -g3
+endif
+
+# Support a SHE-capable build
+ifeq ($(SHE),1)
+CFLAGS += -DWOLFHSM_CFG_SHE_EXTENSION
+endif
+
 # Architecture
-ARCHFLAGS ?= 
+ARCHFLAGS ?=
 
 # Compiler and linker flags
 ASFLAGS ?= $(ARCHFLAGS)
@@ -34,13 +44,13 @@ LDFLAGS ?= $(ARCHFLAGS)
 # Libc for printf, libm for math
 LIBS = -lc -lm
 
-# Optimization level and place functions / data into separate sections to allow dead code removal 
-CFLAGS += -O0 -ffunction-sections -fdata-sections 
+# Optimization level and place functions / data into separate sections to allow dead code removal
+CFLAGS += -O0 -ffunction-sections -fdata-sections
 #-fstrict-volatile-bitfields #-fno-builtin
 
 # Remove unused sections and link time optimizations
-#LDFLAGS += -Wl,--cref -Wl,--gc-sections -static -u _printf_float -Wl,--start-group $(LIBS) -Wl,--end-group -flto 
-#-nostartfiles #-nodefaultlibs # -nostdlib 
+#LDFLAGS += -Wl,--cref -Wl,--gc-sections -static -u _printf_float -Wl,--start-group $(LIBS) -Wl,--end-group -flto
+#-nostartfiles #-nodefaultlibs # -nostdlib
 
 # Debugging
 DBGFLAGS = -ggdb -g3
@@ -48,7 +58,7 @@ CFLAGS += $(DBGFLAGS)
 LDFLAGS += $(DBGFLAGS)
 
 # Assembly source files
-SRC_ASM += 
+SRC_ASM +=
 
 #wolfCrypt source files
 SRC_C += $(wildcard $(WOLFSSL_DIR)/wolfcrypt/src/*.c)
@@ -61,7 +71,7 @@ SRC_C += $(wildcard $(WOLFHSM_DIR)/src/*.c)
 SRC_C +=    $(WOLFHSM_DIR)/port/posix/posix_transport_tcp.c
 
 # Server App
-SRC_C += ./src/wh_server_tcp.c 
+SRC_C += ./src/wh_server_tcp.c
 
 
 FILENAMES_C = $(notdir $(SRC_C))
